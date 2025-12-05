@@ -1,0 +1,862 @@
+/* ============================
+   ROOT THEME VARIABLES
+============================ */
+:root {
+  --text-main: #1d2b20;
+  --text-muted: #647067;
+  --accent: #4b8b73;
+  --accent-soft: rgba(75, 139, 115, 0.12);
+  --soft-green-bg: #e9f5ec;
+  --card-bg: rgba(255, 255, 255, 0.97);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 42px rgba(0, 0, 0, 0.08);
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    sans-serif;
+}
+
+/* ============================
+   GLOBAL RESET
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at top left, #eaf6ef 0, #ffffff 55%);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  padding: 24px;
+}
+
+/* For the main shell around countdown / letter */
+.main-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-shell {
+  max-width: 1320px;
+  width: 100%;
+}
+
+/* ============================
+   APP LAYOUT
+============================ */
+.love-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  body {
+    padding: 16px;
+  }
+  .love-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ============================
+   BADGES & PILLS
+============================ */
+.badge-soft {
+  font-size: 13px;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(75, 139, 115, 0.14);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 12px;
+}
+
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--soft-green-bg);
+  color: var(--text-main);
+}
+
+/* ============================
+   TYPOGRAPHY
+============================ */
+.love-title {
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 650;
+  margin: 14px 0 10px;
+}
+
+.love-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .love-title {
+    font-size: 30px;
+  }
+}
+
+.love-page-label {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  color: var(--accent);
+}
+
+.love-page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.love-page-body {
+  margin-top: 8px;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+.soft-quote {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px dashed rgba(90, 108, 95, 0.45);
+  font-style: italic;
+  font-family: var(--font-handwritten, inherit);
+}
+
+.love-page-corner {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.love-page-number {
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* ============================
+   PAGE CARD
+============================ */
+.love-page-card {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 22px 24px 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(26, 81, 52, 0.09);
+}
+
+/* ============================
+   BUTTONS
+============================ */
+.button-primary {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2e7d5b, #4b8b73);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 24px rgba(46, 125, 91, 0.38);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+}
+
+.button-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+
+.button-primary:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(46, 125, 91, 0.45);
+}
+
+/* solid button used on countdown page */
+.button-solid {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2e7d5b, #4b8b73);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 24px rgba(46, 125, 91, 0.38);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+}
+
+.button-solid:disabled {
+  opacity: 0.65;
+  cursor: default;
+  box-shadow: none;
+}
+
+.button-solid:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(46, 125, 91, 0.45);
+}
+
+.button-ghost {
+  border: none;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(75, 139, 115, 0.08);
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+
+.button-ghost:hover:not(:disabled) {
+  background: rgba(75, 139, 115, 0.14);
+}
+
+.button-ghost:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ============================
+   BOTTOM PAGE NAV
+============================ */
+.pagination-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid rgba(75, 139, 115, 0.12);
+  box-shadow: var(--shadow-sm);
+}
+
+.pagination-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.nav-pill {
+  width: 132px;
+  height: 52px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  white-space: nowrap;
+}
+
+.nav-pill:hover:not(:disabled) {
+  background: rgba(75, 139, 115, 0.09);
+}
+
+.nav-pill:disabled {
+  opacity: 0.55;
+}
+
+@media (max-width: 640px) {
+  .pagination-row {
+    grid-template-columns: 1fr;
+    border-radius: var(--radius-md);
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .nav-pill {
+    width: 100%;
+  }
+  .pagination-meta {
+    order: -1;
+  }
+}
+
+/* ============================
+   IMPORTANT DATES STRIP
+============================ */
+.dates-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+@media (max-width: 960px) {
+  .dates-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .dates-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.date-card {
+  border-radius: 20px;
+  background: var(--card-bg);
+  padding: 12px 14px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+}
+
+.date-top {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.date-emoji {
+  font-size: 18px;
+  margin-top: -2px;
+}
+
+.date-label {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.date-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.date-note {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+/* ============================
+   SOMEDAY / SOON LIST
+============================ */
+.someday-shell {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 16px 18px 14px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-md);
+  margin-top: 20px;
+}
+
+.someday-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.someday-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+.someday-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  padding: 5px 0;
+}
+
+.someday-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 81, 52, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--accent);
+  background: #f4faf6;
+  margin-top: 2px;
+}
+
+.someday-item.done .someday-icon {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(75, 139, 115, 0.2);
+}
+
+.someday-detail {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============================
+   CAROUSEL
+============================ */
+.carousel-shell {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 16px 16px 12px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 290px;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .carousel-image {
+    height: 220px;
+  }
+}
+
+.carousel-caption {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(26, 81, 52, 0.25);
+}
+
+.dot-active {
+  width: 10px;
+  background: var(--accent);
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.carousel-nav .button-ghost {
+  min-width: 110px;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .carousel-nav {
+    justify-content: space-between;
+  }
+
+  .carousel-nav .button-ghost {
+    flex: 1;
+  }
+}
+
+.carousel-footnote {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ============================
+   COUNTDOWN PAGE (centered)
+============================ */
+.countdown-wrapper {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 32px 28px 30px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-lg);
+  max-width: 780px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.countdown-title {
+  margin-top: 12px;
+}
+
+.countdown-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 12px auto 0;
+}
+
+.countdown-center {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Circle timer */
+.countdown-ring {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid rgba(75, 139, 115, 0.35);
+  background: radial-gradient(circle at 30% 20%, #f6fff9, #e7f4ec);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-inner {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-number {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.countdown-label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Buttons under the circle */
+.countdown-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.impatient-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin-top: 8px;
+}
+
+.subtle-caption {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* Mobile tweaks for countdown */
+@media (max-width: 640px) {
+  .countdown-wrapper {
+    padding: 24px 18px 26px;
+    margin: 24px 12px;
+  }
+
+  .countdown-ring {
+    width: 150px;
+    height: 150px;
+  }
+
+  .countdown-inner {
+    width: 118px;
+    height: 118px;
+  }
+
+  .countdown-number {
+    font-size: 20px;
+  }
+
+  .countdown-sub {
+    font-size: 14px;
+    max-width: 100%;
+  }
+}
+
+/* ============================
+   "DO NOT CLICK" SECRET BUTTON
+============================ */
+.dont-click-wrap {
+  margin-top: 18px;
+}
+
+.dont-click-button {
+  position: relative;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  background:
+    radial-gradient(circle at 0% 0%, #fff6f9, #ffd4e9 40%, #ffb3c6 80%);
+  color: #3a1b2d;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 0 24px rgba(252, 111, 178, 0.8);
+  animation: dontClickGlow 2.3s ease-in-out infinite;
+}
+
+.dont-click-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9),
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.dont-click-button:hover::before {
+  opacity: 1;
+}
+
+.dont-click-emoji {
+  font-size: 14px;
+}
+
+.dont-click-caption {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+@keyframes dontClickGlow {
+  0% {
+    transform: translateY(0);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9),
+      0 0 18px rgba(252, 111, 178, 0.6);
+  }
+  50% {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 1),
+      0 0 28px rgba(252, 111, 178, 0.95);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9),
+      0 0 18px rgba(252, 111, 178, 0.6);
+  }
+}
+
+/* ============================
+   MISC
+============================ */
+.side-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+/* ============================
+   SECRET PAGE
+============================ */
+.secret-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secret-card {
+  max-width: 720px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 28px 26px 24px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-lg);
+}
+
+.secret-media-block {
+  margin-top: 22px;
+}
+
+.secret-media {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 18px;
+  background: #0f172a;
+}
+
+.secret-media-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.secret-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ============================
+   FUN STRIP (tiny note + character)
+============================ */
+.fun-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+  gap: 16px;
+  margin-top: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 800px) {
+  .fun-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tiny-note-card {
+  border-radius: var(--radius-md);
+  background: rgba(233, 245, 236, 0.9);
+  padding: 14px 16px 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(75, 139, 115, 0.18);
+}
+
+.tiny-note-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.tiny-note-text {
+  font-size: 13px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.tiny-note-button {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.tiny-character {
+  border-radius: var(--radius-md);
+  background: radial-gradient(circle at top, #f5fbf7, #e6f3ee);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(75, 139, 115, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.tiny-emoji {
+  font-size: 26px;
+}
+
+.tiny-character-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ============================
+   SECRET BUTTON MOBILE BEHAVIOR
+============================ */
+@media (max-width: 800px) {
+  .dont-click-wrap {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    text-align: center;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  .dont-click-button {
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .dont-click-caption {
+    display: none;
+  }
+}
+
+.dont-click-button:active {
+  transform: scale(0.97);
+  transition: 0.12s;
+}

@@ -65,7 +65,7 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
     <button className="button-ghost" onClick={handlePenalty}>
       I’m impatient 😭 (adds +5 mins)
     </button>
-    <p className="impatient-note">This will delay the unlock time by 5 minutes 👀</p>
+    <p className="impatient-note">I love you more!</p>
 
   </div>
 </div>

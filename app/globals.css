@@ -518,8 +518,19 @@ body {
 }
 
 /* ============================
-   COUNTDOWN PAGE (centered)
+   COUNTDOWN PAGE (centered, boxes)
 ============================ */
+
+/* Full-screen center wrapper */
+.countdown-center-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Main card */
 .countdown-wrapper {
   border-radius: var(--radius-lg);
   background: var(--card-bg);
@@ -527,7 +538,8 @@ body {
   border: 1px solid rgba(26, 81, 52, 0.08);
   box-shadow: var(--shadow-lg);
   max-width: 780px;
-  margin: 40px auto;
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -542,52 +554,46 @@ body {
   margin: 12px auto 0;
 }
 
-.countdown-center {
-  margin-top: 28px;
+/* Timer boxes */
+.timer-box {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-
-/* Circle timer */
-.countdown-ring {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 3px solid rgba(75, 139, 115, 0.35);
-  background: radial-gradient(circle at 30% 20%, #f6fff9, #e7f4ec);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-  display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 22px;
+  margin: 30px auto;
+  flex-wrap: wrap;
 }
 
-.countdown-inner {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: white;
+.time-seg {
+  width: 132px;        /* locked width */
+  height: 88px;        /* locked height */
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  border: 1px solid rgba(26, 81, 52, 0.1);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
-.countdown-number {
-  font-size: 22px;
-  font-weight: 600;
+.time-num {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 42px;     /* keeps text centered as digits change */
+  text-align: center;
 }
 
-.countdown-label {
+.time-label {
   font-size: 10px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
   color: var(--text-muted);
-  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  margin-top: 6px;
 }
 
-/* Buttons under the circle */
+/* Buttons + captions */
 .countdown-actions {
   display: flex;
   gap: 12px;
@@ -613,21 +619,20 @@ body {
 @media (max-width: 640px) {
   .countdown-wrapper {
     padding: 24px 18px 26px;
-    margin: 24px 12px;
+    margin: 0 12px;
   }
 
-  .countdown-ring {
-    width: 150px;
-    height: 150px;
+  .timer-box {
+    gap: 12px;
   }
 
-  .countdown-inner {
-    width: 118px;
-    height: 118px;
+  .time-seg {
+    width: 100px;
+    height: 78px;
   }
 
-  .countdown-number {
-    font-size: 20px;
+  .time-num {
+    font-size: 26px;
   }
 
   .countdown-sub {

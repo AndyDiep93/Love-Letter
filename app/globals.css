@@ -296,7 +296,388 @@ body {
   box-shadow: none;
 }
 
+<<<<<<< HEAD
 /* Secret playful */
+=======
+/* ============================
+   BOTTOM PAGE NAV
+============================ */
+.pagination-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid rgba(75, 139, 115, 0.12);
+  box-shadow: var(--shadow-sm);
+}
+
+.pagination-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.nav-pill {
+  width: 132px;
+  height: 52px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  white-space: nowrap;
+}
+
+.nav-pill:hover:not(:disabled) {
+  background: rgba(75, 139, 115, 0.09);
+}
+
+.nav-pill:disabled {
+  opacity: 0.55;
+}
+
+@media (max-width: 640px) {
+  .pagination-row {
+    grid-template-columns: 1fr;
+    border-radius: var(--radius-md);
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .nav-pill {
+    width: 100%;
+  }
+  .pagination-meta {
+    order: -1;
+  }
+}
+
+/* ============================
+   IMPORTANT DATES STRIP
+============================ */
+.dates-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+@media (max-width: 960px) {
+  .dates-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .dates-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.date-card {
+  border-radius: 20px;
+  background: var(--card-bg);
+  padding: 12px 14px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+}
+
+.date-top {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.date-emoji {
+  font-size: 18px;
+  margin-top: -2px;
+}
+
+.date-label {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.date-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.date-note {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+/* ============================
+   SOMEDAY / SOON LIST
+============================ */
+.someday-shell {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 16px 18px 14px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-md);
+  margin-top: 20px;
+}
+
+.someday-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.someday-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+.someday-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  padding: 5px 0;
+}
+
+.someday-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 81, 52, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--accent);
+  background: #f4faf6;
+  margin-top: 2px;
+}
+
+.someday-item.done .someday-icon {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(75, 139, 115, 0.2);
+}
+
+.someday-detail {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============================
+   CAROUSEL
+============================ */
+.carousel-shell {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 16px 16px 12px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 290px;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .carousel-image {
+    height: 220px;
+  }
+}
+
+.carousel-caption {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(26, 81, 52, 0.25);
+}
+
+.dot-active {
+  width: 10px;
+  background: var(--accent);
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.carousel-nav .button-ghost {
+  min-width: 110px;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .carousel-nav {
+    justify-content: space-between;
+  }
+
+  .carousel-nav .button-ghost {
+    flex: 1;
+  }
+}
+
+.carousel-footnote {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ============================
+   COUNTDOWN PAGE (centered)
+============================ */
+.countdown-wrapper {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 32px 28px 30px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-lg);
+  max-width: 780px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.countdown-title {
+  margin-top: 12px;
+}
+
+.countdown-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 12px auto 0;
+}
+
+.countdown-center {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Circle timer */
+.countdown-ring {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid rgba(75, 139, 115, 0.35);
+  background: radial-gradient(circle at 30% 20%, #f6fff9, #e7f4ec);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-inner {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-number {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.countdown-label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Buttons under the circle */
+.countdown-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.impatient-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin-top: 8px;
+}
+
+.subtle-caption {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* Mobile tweaks for countdown */
+@media (max-width: 640px) {
+  .countdown-wrapper {
+    padding: 24px 18px 26px;
+    margin: 24px 12px;
+  }
+
+  .countdown-ring {
+    width: 150px;
+    height: 150px;
+  }
+
+  .countdown-inner {
+    width: 118px;
+    height: 118px;
+  }
+
+  .countdown-number {
+    font-size: 20px;
+  }
+
+  .countdown-sub {
+    font-size: 14px;
+    max-width: 100%;
+  }
+}
+
+/* ============================
+   "DO NOT CLICK" SECRET BUTTON
+============================ */
+>>>>>>> parent of 5202a58 (Added more love notes)
 .dont-click-wrap {
   margin-top: 40px;
   text-align: center;

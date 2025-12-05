@@ -15,259 +15,233 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 12px 42px rgba(0, 0, 0, 0.08);
 
-  /* for parallax scroll */
-  --scrollY: 0;
-
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display",
     sans-serif;
 }
 
 /* ============================
-   BASE
+   GLOBAL RESET
 ============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: radial-gradient(circle at top left, #eaf6ef 0, #ffffff 55%);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
-  padding: 0;
-  overflow-x: hidden;
+  padding: 24px;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* For the main shell around countdown / letter */
+.main-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-shell {
+  max-width: 1320px;
+  width: 100%;
+}
+
+/* ============================
+   APP LAYOUT
+============================ */
+.love-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  body {
+    padding: 16px;
+  }
+  .love-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ============================
+   BADGES & PILLS
+============================ */
+.badge-soft {
+  font-size: 13px;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(75, 139, 115, 0.14);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 12px;
+}
+
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--soft-green-bg);
+  color: var(--text-main);
 }
 
 /* ============================
    TYPOGRAPHY
 ============================ */
 .love-title {
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.22;
-  margin: 24px 0 14px;
-}
-
-@media (min-width: 768px) {
-  .love-title {
-    font-size: 46px;
-  }
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 650;
+  margin: 14px 0 10px;
 }
 
 .love-subtitle {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--text-muted);
-  max-width: 540px;
-  line-height: 1.55;
-}
-
-/* Badges & Pills */
-.badge-soft {
-  background: rgba(75, 139, 115, 0.1);
-  color: var(--text-main);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.pill-row {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-  flex-wrap: wrap;
-}
-
-.pill {
-  background: var(--accent-soft);
-  padding: 6px 12px;
-  font-size: 13px;
-  border-radius: 999px;
-}
-
-/* ============================
-   MAIN LAYOUT
-============================ */
-.love-layout {
-  display: grid;
-  gap: 40px;
-  max-width: 1250px;
-  margin: 0 auto;
-}
-
-@media (min-width: 960px) {
-  .love-layout {
-    grid-template-columns: 1fr 380px;
-    border-radius: 32px;
-    padding: 28px 28px 24px;
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(26, 81, 52, 0.06);
-  }
-}
-
-/* ============================
-   PARALLAX BACKGROUND SHELL
-============================ */
-.parallax-page {
-  position: relative;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.parallax-content {
-  position: relative;
-  z-index: 1;
-  padding: 32px 16px 80px;
-}
-
-@media (min-width: 960px) {
-  .parallax-content {
-    padding: 56px 24px 104px;
-  }
-}
-
-/* Floating greenery layers */
-.parallax-layer {
-  position: fixed;
-  inset: -150px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.parallax-layer-back::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 10% 0%, rgba(169, 211, 180, 0.52), transparent 55%),
-    radial-gradient(circle at 90% 20%, rgba(188, 226, 198, 0.48), transparent 60%);
-  transform: translate3d(0, calc(var(--scrollY) * -0.08px), 0);
-  filter: blur(2px);
-}
-
-.parallax-layer-front::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 80%, rgba(161, 205, 177, 0.55), transparent 60%),
-    radial-gradient(circle at 85% 65%, rgba(138, 191, 164, 0.6), transparent 60%);
-  transform: translate3d(0, calc(var(--scrollY) * -0.16px), 0);
-  mix-blend-mode: multiply;
-  opacity: 0.9;
+  max-width: 560px;
+  line-height: 1.45;
 }
 
 @media (max-width: 640px) {
-  .parallax-layer-back::before {
-    transform: translate3d(0, calc(var(--scrollY) * -0.04px), 0);
+  .love-title {
+    font-size: 30px;
   }
-  .parallax-layer-front::before {
-    transform: translate3d(0, calc(var(--scrollY) * -0.08px), 0);
-  }
-}
-
-/* ============================
-   LOVE PAGE CARD
-============================ */
-.love-page-card {
-  backdrop-filter: blur(14px);
-  background: rgba(255, 255, 255, 0.93);
-  border-radius: 28px;
-  padding: 24px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(75, 139, 115, 0.12);
 }
 
 .love-page-label {
-  font-size: 12px;
-  opacity: 0.7;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  color: var(--accent);
 }
 
 .love-page-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
   margin-top: 6px;
 }
 
 .love-page-body {
-  font-size: 15px;
+  margin-top: 8px;
   line-height: 1.55;
-  margin-top: 10px;
+  font-size: 15px;
 }
 
 .soft-quote {
-  font-style: italic;
-  margin-top: 14px;
+  font-size: 14px;
   color: var(--text-muted);
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px dashed rgba(90, 108, 95, 0.45);
+  font-style: italic;
+  font-family: var(--font-handwritten, inherit);
 }
 
 .love-page-corner {
+  margin-top: 12px;
   font-size: 12px;
-  margin-top: 16px;
-  opacity: 0.6;
+  color: var(--text-muted);
+}
+
+.love-page-number {
+  font-weight: 500;
+  color: var(--accent);
 }
 
 /* ============================
-   DAILY NOTE STRIP
+   PAGE CARD
 ============================ */
-.fun-strip {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  margin: 28px 0;
-}
-
-.tiny-note-card {
-  border-radius: 22px;
-  background: var(--soft-green-bg);
-  border: 1px solid rgba(75, 139, 115, 0.15);
-  padding: 14px 16px;
-  flex: 1;
-  box-shadow: 0 6px 14px rgba(46, 125, 91, 0.12);
-}
-
-.tiny-note-label {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.tiny-note-text {
-  font-size: 15px;
-  margin-top: 6px;
-}
-
-.tiny-character {
-  text-align: center;
-}
-
-.tiny-emoji {
-  font-size: 28px;
-}
-
-.tiny-character-caption {
-  font-size: 11px;
-  opacity: 0.6;
+.love-page-card {
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 22px 24px 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(26, 81, 52, 0.09);
 }
 
 /* ============================
-   BUTTONS (improved contrast)
+   BUTTONS
 ============================ */
-.button-ghost {
+.button-primary {
+  border: none;
+  padding: 11px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(75, 139, 115, 0.35);
+  background: linear-gradient(135deg, #2e7d5b, #4b8b73);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 24px rgba(46, 125, 91, 0.38);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+}
+
+.button-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+
+.button-primary:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(46, 125, 91, 0.45);
+}
+
+/* solid button used on countdown page */
+.button-solid {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2e7d5b, #4b8b73);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 24px rgba(46, 125, 91, 0.38);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+}
+
+.button-solid:disabled {
+  opacity: 0.65;
+  cursor: default;
+  box-shadow: none;
+}
+
+.button-solid:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(46, 125, 91, 0.45);
+}
+
+.button-ghost {
+  border: none;
   padding: 9px 14px;
-  background: rgba(75, 139, 115, 0.06);
+  border-radius: 999px;
+  background: rgba(75, 139, 115, 0.08);
   font-size: 14px;
   color: var(--text-main);
   cursor: pointer;
@@ -275,30 +249,18 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.08s ease,
-    box-shadow 0.12s ease;
-  box-shadow: 0 6px 14px rgba(46, 125, 91, 0.12);
+  transition: background 0.15s ease, transform 0.08s ease;
 }
 
 .button-ghost:hover:not(:disabled) {
-  background: rgba(75, 139, 115, 0.12);
-  border-color: rgba(75, 139, 115, 0.6);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(46, 125, 91, 0.18);
+  background: rgba(75, 139, 115, 0.14);
 }
 
 .button-ghost:disabled {
   opacity: 0.5;
   cursor: default;
-  box-shadow: none;
 }
 
-<<<<<<< HEAD
-/* Secret playful */
-=======
 /* ============================
    BOTTOM PAGE NAV
 ============================ */
@@ -556,8 +518,19 @@ body {
 }
 
 /* ============================
-   COUNTDOWN PAGE (centered)
+   COUNTDOWN PAGE (centered, boxes)
 ============================ */
+
+/* Full-screen center wrapper */
+.countdown-center-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Main card */
 .countdown-wrapper {
   border-radius: var(--radius-lg);
   background: var(--card-bg);
@@ -565,7 +538,8 @@ body {
   border: 1px solid rgba(26, 81, 52, 0.08);
   box-shadow: var(--shadow-lg);
   max-width: 780px;
-  margin: 40px auto;
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -580,52 +554,46 @@ body {
   margin: 12px auto 0;
 }
 
-.countdown-center {
-  margin-top: 28px;
+/* Timer boxes */
+.timer-box {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-
-/* Circle timer */
-.countdown-ring {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 3px solid rgba(75, 139, 115, 0.35);
-  background: radial-gradient(circle at 30% 20%, #f6fff9, #e7f4ec);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-  display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 22px;
+  margin: 30px auto;
+  flex-wrap: wrap;
 }
 
-.countdown-inner {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: white;
+.time-seg {
+  width: 132px;        /* locked width */
+  height: 88px;        /* locked height */
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  border: 1px solid rgba(26, 81, 52, 0.1);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
-.countdown-number {
-  font-size: 22px;
-  font-weight: 600;
+.time-num {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 42px;     /* keeps text centered as digits change */
+  text-align: center;
 }
 
-.countdown-label {
+.time-label {
   font-size: 10px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
   color: var(--text-muted);
-  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  margin-top: 6px;
 }
 
-/* Buttons under the circle */
+/* Buttons + captions */
 .countdown-actions {
   display: flex;
   gap: 12px;
@@ -651,21 +619,20 @@ body {
 @media (max-width: 640px) {
   .countdown-wrapper {
     padding: 24px 18px 26px;
-    margin: 24px 12px;
+    margin: 0 12px;
   }
 
-  .countdown-ring {
-    width: 150px;
-    height: 150px;
+  .timer-box {
+    gap: 12px;
   }
 
-  .countdown-inner {
-    width: 118px;
-    height: 118px;
+  .time-seg {
+    width: 100px;
+    height: 78px;
   }
 
-  .countdown-number {
-    font-size: 20px;
+  .time-num {
+    font-size: 26px;
   }
 
   .countdown-sub {
@@ -677,61 +644,224 @@ body {
 /* ============================
    "DO NOT CLICK" SECRET BUTTON
 ============================ */
->>>>>>> parent of 5202a58 (Added more love notes)
 .dont-click-wrap {
-  margin-top: 40px;
-  text-align: center;
+  margin-top: 18px;
 }
 
 .dont-click-button {
-  background: linear-gradient(135deg, #e9f5ec, #ffffff);
-  border: 1.4px solid var(--accent);
-  border-radius: 28px;
-  padding: 10px 18px;
-  font-size: 15px;
+  position: relative;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  background:
+    radial-gradient(circle at 0% 0%, #fff6f9, #ffd4e9 40%, #ffb3c6 80%);
+  color: #3a1b2d;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 0 24px rgba(252, 111, 178, 0.8);
+  animation: dontClickGlow 2.3s ease-in-out infinite;
 }
 
-.dont-click-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(75, 139, 115, 0.25);
+.dont-click-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9),
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.dont-click-button:hover::before {
+  opacity: 1;
+}
+
+.dont-click-emoji {
+  font-size: 14px;
 }
 
 .dont-click-caption {
-  font-size: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
   margin-top: 6px;
-  opacity: 0.6;
+}
+
+@keyframes dontClickGlow {
+  0% {
+    transform: translateY(0);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9),
+      0 0 18px rgba(252, 111, 178, 0.6);
+  }
+  50% {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 1),
+      0 0 28px rgba(252, 111, 178, 0.95);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9),
+      0 0 18px rgba(252, 111, 178, 0.6);
+  }
 }
 
 /* ============================
-   NAV
-============================ */
-.pagination-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 22px;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.pagination-meta {
-  font-size: 13px;
-  opacity: 0.7;
-}
-
-.nav-pill {
-  min-width: 140px;
-}
-
-/* ============================
-   UTILITY
+   MISC
 ============================ */
 .side-note {
   font-size: 12px;
-  opacity: 0.6;
+  color: var(--text-muted);
   margin-top: 14px;
-  text-align: center;
 }
 
+/* ============================
+   SECRET PAGE
+============================ */
+.secret-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secret-card {
+  max-width: 720px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 28px 26px 24px;
+  border: 1px solid rgba(26, 81, 52, 0.08);
+  box-shadow: var(--shadow-lg);
+}
+
+.secret-media-block {
+  margin-top: 22px;
+}
+
+.secret-media {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 18px;
+  background: #0f172a;
+}
+
+.secret-media-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.secret-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ============================
+   FUN STRIP (tiny note + character)
+============================ */
+.fun-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+  gap: 16px;
+  margin-top: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 800px) {
+  .fun-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tiny-note-card {
+  border-radius: var(--radius-md);
+  background: rgba(233, 245, 236, 0.9);
+  padding: 14px 16px 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(75, 139, 115, 0.18);
+}
+
+.tiny-note-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.tiny-note-text {
+  font-size: 13px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.tiny-note-button {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.tiny-character {
+  border-radius: var(--radius-md);
+  background: radial-gradient(circle at top, #f5fbf7, #e6f3ee);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(75, 139, 115, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.tiny-emoji {
+  font-size: 26px;
+}
+
+.tiny-character-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ============================
+   SECRET BUTTON MOBILE BEHAVIOR
+============================ */
+@media (max-width: 800px) {
+  .dont-click-wrap {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    text-align: center;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  .dont-click-button {
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .dont-click-caption {
+    display: none;
+  }
+}
+
+.dont-click-button:active {
+  transform: scale(0.97);
+  transition: 0.12s;
+}

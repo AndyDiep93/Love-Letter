@@ -49,7 +49,7 @@ export default function HomePage() {
         {unlocked ? (
           <LoveBook />
         ) : (
-          <CountdownGate seconds={10} onUnlock={handleUnlock} />
+          <CountdownGate onUnlock={handleUnlock} />
         )}
       </div>
     </main>

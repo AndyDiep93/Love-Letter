@@ -20,6 +20,7 @@ const somedayItems: SomedayItem[] = [
     label: "Take a trip that’s planned entirely around food.",
     detail: "Breakfast spots, late dinners, dessert detours.",
   },
+  
   {
     label: "Grow way too many plants in our place.",
     detail: "You name them, I overwater them.",

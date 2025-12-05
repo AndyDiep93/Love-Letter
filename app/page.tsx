@@ -14,6 +14,7 @@ export default function HomePage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    
     const handleResize = () => {
       setViewport({
         width: window.innerWidth,

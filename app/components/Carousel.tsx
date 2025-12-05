@@ -8,6 +8,7 @@ type Slide = {
   caption: string;
 };
 
+
 const slides: Slide[] = [
   {
     src: "https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg",

@@ -64,6 +64,7 @@ export function LoveBook() {
 
   const current = pages[pageIndex];
 
+  
   // Pick a “note of the day” so it feels intentional
   useEffect(() => {
     const today = new Date();

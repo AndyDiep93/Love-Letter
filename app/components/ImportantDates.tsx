@@ -7,6 +7,7 @@ type ImportantDate = {
   note: string;
 };
 
+
 const importantDates: ImportantDate[] = [
   {
     emoji: "🌱",

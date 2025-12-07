@@ -7,6 +7,7 @@ type CountdownGateProps = {
 };
 
 const PENALTY_STORAGE_KEY = "love-letter-penalty-minutes";
+const BONUS_STORAGE_KEY = "love-letter-bonus-minutes"; // 0 or 60
 
 export function CountdownGate({ onUnlock }: CountdownGateProps) {
   const targetDate = new Date("December 7, 2025 22:00:00 GMT-0700"); // MST 10PM
@@ -18,32 +19,49 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
     seconds: 0,
   });
 
+  // +5 min button
   const [penaltyMinutes, setPenaltyMinutes] = useState(0);
+  // -60 min “Andy loves you more” button
+  const [bonusMinutes, setBonusMinutes] = useState(0); // 0 or 60
 
-  // 🔹 1) On mount, restore saved penalty minutes
+  // 🔹 1) Restore saved values on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const stored = window.localStorage.getItem(PENALTY_STORAGE_KEY);
-    if (!stored) return;
 
-    const parsed = parseInt(stored, 10);
-    if (!Number.isNaN(parsed) && parsed > 0) {
-      setPenaltyMinutes(parsed);
+    const storedPenalty = window.localStorage.getItem(PENALTY_STORAGE_KEY);
+    const storedBonus = window.localStorage.getItem(BONUS_STORAGE_KEY);
+
+    if (storedPenalty) {
+      const parsed = parseInt(storedPenalty, 10);
+      if (!Number.isNaN(parsed) && parsed >= 0) {
+        setPenaltyMinutes(parsed);
+      }
+    }
+
+    if (storedBonus) {
+      const parsed = parseInt(storedBonus, 10);
+      if (!Number.isNaN(parsed) && parsed >= 0) {
+        setBonusMinutes(parsed);
+      }
     }
   }, []);
 
-  // 🔹 2) Save penalty minutes whenever they change
+  // 🔹 2) Persist whenever either value changes
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(PENALTY_STORAGE_KEY, String(penaltyMinutes));
-  }, [penaltyMinutes]);
+    window.localStorage.setItem(BONUS_STORAGE_KEY, String(bonusMinutes));
+  }, [penaltyMinutes, bonusMinutes]);
 
-  // 🔹 3) Your existing countdown logic, unchanged
+  // 🔹 3) Main countdown logic
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
+
+      // penalty adds time, bonus subtracts time
+      const offsetMinutes = penaltyMinutes - bonusMinutes;
       const adjustedTarget = new Date(
-        targetDate.getTime() + penaltyMinutes * 60000
+        targetDate.getTime() + offsetMinutes * 60000
       );
 
       const diff = adjustedTarget.getTime() - now.getTime();
@@ -52,6 +70,7 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
         clearInterval(interval);
         if (typeof window !== "undefined") {
           window.localStorage.removeItem(PENALTY_STORAGE_KEY);
+          window.localStorage.removeItem(BONUS_STORAGE_KEY);
         }
         onUnlock();
         return;
@@ -66,12 +85,23 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [penaltyMinutes, onUnlock]);
+  }, [penaltyMinutes, bonusMinutes, onUnlock]);
 
-  // 🔹 4) Button: still adds +5 mins, but now it also persists
+  // 🔹 4) Handlers
+
   const handlePenalty = () => {
     setPenaltyMinutes((prev) => prev + 5);
   };
+
+  const handleBonus = () => {
+    // Only let her use this once (1 hour)
+    setBonusMinutes((prev) => {
+      if (prev >= 60) return prev; // already used
+      return 60;
+    });
+  };
+
+  const bonusUsed = bonusMinutes >= 60;
 
   return (
     <div className="countdown-center-wrapper">
@@ -100,12 +130,25 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
           </div>
         </div>
 
-        <button className="button-ghost" onClick={handlePenalty}>
-          I’m impatient 😭 (adds +5 mins)
-        </button>
+        <div className="countdown-buttons">
+          <button className="button-ghost" onClick={handlePenalty}>
+            I’m impatient 😭 (adds +5 mins)
+          </button>
+
+          <button
+  className="button-ghost"
+  onClick={handleBonus}
+  disabled={bonusUsed}
+>
+  {bonusUsed
+    ? "Admission received. One hour removed.😏❤️"
+    : "Reduce the wait by 1 hour… if you freely admit Andy loves you more. 😏"}
+</button>
+
+        </div>
+
         <p className="impatient-note">I love you more!</p>
       </div>
     </div>
   );
-  
 }

@@ -22,14 +22,13 @@ export default function SecretPage() {
 
         <div className="secret-media-block">
   <audio
-    className="secret-media"
-    controls
-    preload="metadata"
-  >
-    <source src="/New Recording.m4a" type="audio/mp4" />
-    <source src="/New Recording.m4a" type="audio/x-m4a" />
-    Your browser does not support the audio element.
-  </audio>
+  className="secret-media"
+  controls
+  src="/NewRecording.m4a"   // or .mp3 if that's the extension
+>
+  Your browser does not support the audio element.
+</audio>
+
 
   {/* <p className="secret-media-note">
     If this player is quiet, it just means I haven&apos;t uploaded the

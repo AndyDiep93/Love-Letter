@@ -6,7 +6,8 @@ type Slide = {
   src: string;
   alt: string;
   caption: string;
-  link?: string; // optional MP4 path
+  link?: string;        // optional video URL
+  isEmbed?: boolean;    // true for YouTube
 };
 
 const slides: Slide[] = [
@@ -21,10 +22,12 @@ const slides: Slide[] = [
     caption: "The exact second the world slowed down and it was just us.",
   },
   {
-    src: "/Kneel.png", // make sure this file is in /public
+    src: "/Kneel.png",
     alt: "A moving memory",
     caption: "There’s sound, movement, and laughter in this one. Tap to play.",
-    link: "/DJI_20250214234326_0304_D.MP4",
+    // use the EMBED url, not the share url
+    link: "https://www.youtube.com/embed/PbOxeaWYYFs",
+    isEmbed: true,
   },
 ];
 
@@ -49,14 +52,24 @@ export function Carousel() {
   return (
     <div className="carousel-shell">
       <div className="carousel-media">
-        {/* If this slide has a video + we've tapped play, show video inline */}
         {canPlayVideo && play ? (
-          <video
-            src={current.link}
-            controls
-            autoPlay
-            className="carousel-image"
-          />
+          current.isEmbed ? (
+            // YouTube iframe
+            <iframe
+              src={current.link}
+              className="carousel-image"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          ) : (
+            // Direct video file
+            <video
+              src={current.link}
+              controls
+              autoPlay
+              className="carousel-image"
+            />
+          )
         ) : (
           <>
             <img
@@ -69,7 +82,6 @@ export function Carousel() {
               style={{ cursor: canPlayVideo ? "pointer" : "default" }}
             />
 
-            {/* Play button overlay only for the video slide before playing */}
             {canPlayVideo && !play && (
               <button
                 type="button"

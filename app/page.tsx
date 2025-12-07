@@ -46,6 +46,7 @@ export default function HomePage() {
       )}
 
       <div className="card-shell">
+         {/* <LoveBook /> */}
         {unlocked ? (
           <LoveBook />
         ) : (

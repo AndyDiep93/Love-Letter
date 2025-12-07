@@ -440,6 +440,9 @@ body {
 /* ============================
    CAROUSEL
 ============================ */
+/* ============================
+   CAROUSEL
+============================ */
 .carousel-shell {
   border-radius: var(--radius-lg);
   background: var(--card-bg);
@@ -448,23 +451,49 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+/* Fixed aspect ratio so every slide is the same size */
 .carousel-media {
+  position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  background: #000;
+  aspect-ratio: 3 / 2; /* tweak to 4 / 3 or 16 / 9 if you prefer */
 }
 
 .carousel-image {
   width: 100%;
-  height: 290px;
-  object-fit: cover;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* change to 'contain' if you want zero cropping */
 }
 
-@media (max-width: 640px) {
-  .carousel-image {
-    height: 220px;
-  }
+/* Play overlay for the video slide */
+.carousel-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.25), transparent 65%);
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
+.carousel-play-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Text + dots + nav */
 .carousel-caption {
   margin-top: 10px;
   font-size: 14px;
@@ -511,11 +540,6 @@ body {
   }
 }
 
-.carousel-footnote {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 6px;
-}
 
 /* ============================
    COUNTDOWN PAGE (centered, boxes)
@@ -697,6 +721,9 @@ body {
   color: var(--text-muted);
   margin-top: 6px;
 }
+.card-shell {
+    padding-bottom: 110px; /* adjust if you want more/less space */
+  }
 
 @keyframes dontClickGlow {
   0% {
@@ -864,4 +891,9 @@ body {
 .dont-click-button:active {
   transform: scale(0.97);
   transition: 0.12s;
+}
+
+/* Tiny note when it lives inside the page card */
+.tiny-note-inline {
+  margin-top: 12px;
 }

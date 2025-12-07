@@ -12,20 +12,20 @@ const importantDates: ImportantDate[] = [
   {
     emoji: "🌱",
     label: "First date",
-    date: "May 14, 2021",
-    note: "You in that outfit, me pretending I wasn’t nervous at all.",
+    date: "Jul 23, 2021",
+    note: "Having Korean food with you and getting bubbletea, me pretending I wasn’t nervous at all.",
   },
   {
     emoji: "💍",
     label: "Engagement",
-    date: "Aug 3, 2024",
+    date: "Feb 14, 2025",
     note: "Somehow the easiest “yes” and the hardest my heart has ever raced.",
   },
   {
     emoji: "🏡",
     label: "Our home era",
     date: "Soon",
-    note: "Coffee, soft clothes, plants everywhere, and you.",
+    note: "Coffee/Hot Cocoa, soft clothes, plants everywhere, and you.",
   },
   {
     emoji: "✈️",

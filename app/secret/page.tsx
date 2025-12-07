@@ -21,20 +21,22 @@ export default function SecretPage() {
         </p>
 
         <div className="secret-media-block">
-          {/* AUDIO: drop your file as /public/secret-message.mp3 */}
-          <audio
-            className="secret-media"
-            controls
-            src="/secret-message.mp3"
-          >
-            Your browser does not support the audio element.
-          </audio>
+  <audio
+    className="secret-media"
+    controls
+    preload="metadata"
+  >
+    <source src="/New Recording.m4a" type="audio/mp4" />
+    <source src="/New Recording.m4a" type="audio/x-m4a" />
+    Your browser does not support the audio element.
+  </audio>
 
-          <p className="secret-media-note">
-            If this player is quiet, it just means I haven&apos;t uploaded the
-            recording yet. But I promise it&apos;s coming. 💚
-          </p>
-        </div>
+  {/* <p className="secret-media-note">
+    If this player is quiet, it just means I haven&apos;t uploaded the
+    recording yet. But I promise it&apos;s coming. 💚
+  </p> */}
+</div>
+
 
         <div className="secret-actions">
           <Link href="/" className="button-ghost nav-pill">

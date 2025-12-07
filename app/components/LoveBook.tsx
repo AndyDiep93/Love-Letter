@@ -37,46 +37,11 @@ const pages: Page[] = [
   },
 ];
 
-// A bigger pile of tiny love notes for the fun strip ✨
-const tinyNotes: string[] = [
-  "Today’s reason I love you: your laugh when you’re trying not to laugh.",
-  "If you were a notification, you’d be the only one I never mute.",
-  "Somehow you make even grocery runs feel like a date.",
-  "You’re my favorite view, even on days with no sunsets.",
-  "I still get a little excited when your name pops up on my phone.",
-  "You make ordinary days feel like tiny holidays.",
-  "You’re my favorite person to do absolutely nothing with.",
-  "I love how safe it feels to just be myself around you.",
-  "You’re the kind of person I want to grow old and weird with.",
-  "You’re my home base, no matter where we actually are.",
-  "You turn small moments into core memories without even trying.",
-  "You’re my favorite ‘are you still awake?’ text.",
-  "Life feels less scary knowing I get to do it next to you.",
-  "You make my future feel less like a question mark and more like a cozy house with plants.",
-  "You are my comfort person, my crush, and my best friend all at once.",
-  "If I had to pick one good thing about today, it would still be you.",
-  "You’re proof that the universe occasionally gets things very, very right.",
-];
-
 export function LoveBook() {
   const [pageIndex, setPageIndex] = useState(0);
-  const [noteIndex, setNoteIndex] = useState(0);
-
   const current = pages[pageIndex];
 
-  
-  // Pick a “note of the day” so it feels intentional
-  useEffect(() => {
-    const today = new Date();
-    const seed =
-      today.getFullYear() * 10000 +
-      (today.getMonth() + 1) * 100 +
-      today.getDate();
-    const idx = seed % tinyNotes.length;
-    setNoteIndex(idx);
-  }, []);
-
-  // Parallax: update CSS variable based on scroll position
+  // Parallax scroll CSS variable
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window === "undefined") return;
@@ -86,19 +51,12 @@ export function LoveBook() {
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const currentTinyNote = tinyNotes[noteIndex];
 
   const nextPage = () =>
     setPageIndex((prev) => Math.min(prev + 1, pages.length - 1));
   const prevPage = () => setPageIndex((prev) => Math.max(prev - 1, 0));
-
-  const handleAnotherNote = () => {
-    setNoteIndex((prev) => (prev + 1) % tinyNotes.length);
-  };
 
   const handleSecretClick = () => {
     if (typeof window !== "undefined") {
@@ -109,18 +67,12 @@ export function LoveBook() {
   return (
     <div className="parallax-page">
       {/* Soft greenery layers */}
-      <div
-        className="parallax-layer parallax-layer-back"
-        aria-hidden="true"
-      />
-      <div
-        className="parallax-layer parallax-layer-front"
-        aria-hidden="true"
-      />
+      <div className="parallax-layer parallax-layer-back" aria-hidden="true" />
+      <div className="parallax-layer parallax-layer-front" aria-hidden="true" />
 
       <main className="parallax-content">
         <div className="love-layout">
-          {/* LEFT SIDE */}
+          {/* LEFT SIDE – story only */}
           <div>
             <div className="badge-soft">
               <span className="badge-dot" />
@@ -145,45 +97,7 @@ export function LoveBook() {
               <span className="pill">Contains high levels of you</span>
             </div>
 
-            {/* DAILY NOTE STRIP */}
-            <div className="fun-strip">
-              <motion.div
-                className="tiny-note-card"
-                key={currentTinyNote}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.28 }}
-              >
-                <div className="tiny-note-label">Today’s tiny note</div>
-                <p className="tiny-note-text">{currentTinyNote}</p>
-                <button
-                  type="button"
-                  className="button-ghost tiny-note-button"
-                  onClick={handleAnotherNote}
-                >
-                  Another one ↺
-                </button>
-              </motion.div>
-
-              <motion.div
-                className="tiny-character"
-                animate={{ y: [0, -5, 0] }}
-                transition={{
-                  duration: 3.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <div className="tiny-emoji" aria-hidden>
-                  🌿
-                </div>
-                <div className="tiny-character-caption">
-                  Nature soft mode activated.
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Page card with animation */}
+            {/* Page card */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.label}
@@ -197,7 +111,9 @@ export function LoveBook() {
                 <div className="love-page-label">{current.label}</div>
                 <div className="love-page-title">{current.title}</div>
                 <p className="love-page-body">{current.body}</p>
+
                 <p className="soft-quote">“{current.quote}”</p>
+
                 <div className="love-page-corner">
                   <span className="love-page-number">
                     {pageIndex + 1}/{pages.length}
@@ -207,10 +123,7 @@ export function LoveBook() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Important Dates */}
-            <ImportantDates />
-
-            {/* BOTTOM NAV */}
+            {/* Bottom nav */}
             <div className="pagination-row">
               <button
                 type="button"
@@ -218,7 +131,7 @@ export function LoveBook() {
                 onClick={prevPage}
                 disabled={pageIndex === 0}
               >
-                ← Previous page
+                ← Previous
               </button>
 
               <div className="pagination-meta">
@@ -236,7 +149,7 @@ export function LoveBook() {
                 onClick={nextPage}
                 disabled={pageIndex === pages.length - 1}
               >
-                Next page →
+                Next →
               </button>
             </div>
 
@@ -264,9 +177,10 @@ export function LoveBook() {
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT SIDE – memories column */}
           <div>
             <Carousel />
+            <ImportantDates />
             <SomedayList />
           </div>
         </div>

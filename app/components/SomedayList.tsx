@@ -14,7 +14,6 @@ const somedayItems: SomedayItem[] = [
   {
     label: "Have a weekend with no plans and no guilt.",
     detail: "Phones on airplane mode, just us and whatever we feel like.",
-    done: true,
   },
   {
     label: "Take a trip that’s planned entirely around food.",

@@ -7,7 +7,7 @@ type CountdownGateProps = {
 };
 
 const PENALTY_STORAGE_KEY = "love-letter-penalty-minutes";
-const BONUS_STORAGE_KEY = "love-letter-bonus-minutes"; // 0 or 60
+const BONUS_STORAGE_KEY = "love-letter-bonus-minutes"; // can be 0, 60, 120, ...
 
 export function CountdownGate({ onUnlock }: CountdownGateProps) {
   const targetDate = new Date("December 7, 2025 22:00:00 GMT-0700"); // MST 10PM
@@ -21,8 +21,8 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
 
   // +5 min button
   const [penaltyMinutes, setPenaltyMinutes] = useState(0);
-  // -60 min “Andy loves you more” button
-  const [bonusMinutes, setBonusMinutes] = useState(0); // 0 or 60
+  // -60 min “Andy loves you more” button (can stack)
+  const [bonusMinutes, setBonusMinutes] = useState(0);
 
   // 🔹 1) Restore saved values on mount
   useEffect(() => {
@@ -94,14 +94,9 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
   };
 
   const handleBonus = () => {
-    // Only let her use this once (1 hour)
-    setBonusMinutes((prev) => {
-      if (prev >= 60) return prev; // already used
-      return 60;
-    });
+    // allow clicking as many times as she wants: each click -60 minutes
+    setBonusMinutes((prev) => prev + 60);
   };
-
-  const bonusUsed = bonusMinutes >= 60;
 
   return (
     <div className="countdown-center-wrapper">
@@ -135,16 +130,9 @@ export function CountdownGate({ onUnlock }: CountdownGateProps) {
             I’m impatient 😭 (adds +5 mins)
           </button>
 
-          <button
-  className="button-ghost"
-  onClick={handleBonus}
-  disabled={bonusUsed}
->
-  {bonusUsed
-    ? "Admission received. One hour removed.😏❤️"
-    : "Reduce the wait by 1 hour… if you freely admit Andy loves you more. 😏"}
-</button>
-
+          <button className="button-ghost" onClick={handleBonus}>
+            Reduce the wait by 1 hour… if you freely admit Andy loves you more. 😏❤️
+          </button>
         </div>
 
         <p className="impatient-note">I love you more!</p>

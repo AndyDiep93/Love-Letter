@@ -86,7 +86,7 @@ export function LoveBook() {
             </h1>
 
             <p className="love-subtitle">
-              Not a grand speech. Just a small place you can open whenever you
+              Not a big letter. Just a small place you can open whenever you
               need a reminder that someone out here is very, very in love with
               you.
             </p>
